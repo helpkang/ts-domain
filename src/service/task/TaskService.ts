@@ -7,7 +7,15 @@ type CreateTaskType = {
   description: string;
   dueDate: Date;
 };
-export class TaskService {
+
+export interface CreateTaskInputPort {
+  createTask({
+    title,
+    description,
+    dueDate,
+  }: CreateTaskType): Promise<Task>;
+}
+export class TaskService implements CreateTaskInputPort {
   constructor(private taskRepository: TaskRepository) {}
 
   async createTask({
